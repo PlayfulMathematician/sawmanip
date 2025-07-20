@@ -58,10 +58,9 @@ void Saw_update(Saw* saw)
 int main() 
 {
     
-    return 0;
     time_t now = time(NULL);
     printf("Current time: %s", ctime(&now));
-    
+
     clock_t start = clock();
     Saw saw;
     Saw_init(&saw, 1, 1, 1, 'l');
