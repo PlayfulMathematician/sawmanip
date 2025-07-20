@@ -60,6 +60,22 @@ void Saw_update(Saw* saw)
     // update position
     saw->x += saw->dx;
 }
+// whenever the player dies, reset the saw position
+// i will not use this yet.
+void Saw_on_death(Saw* saw, double px)
+{
+    saw->x = saw->rx; 
+    if (px < saw->x)
+    {
+        saw->dir = 'l';
+        saw->dx = -fabs(saw->dx);
+    } 
+    else 
+    {
+        saw->dir = 'r';
+        saw->dx = fabs(saw->dx);
+    }
+}
 
 int main() 
 {
