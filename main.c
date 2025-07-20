@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+// saw struct definition
 typedef struct {
     double x;
-    double rx;
+    double rx; // root x
     double dx;
     char dir;
     double leftedge;
@@ -12,8 +13,9 @@ typedef struct {
 
 } Saw;
 
-void Saw_init(Saw* saw,  int idx,  int leftedge,  int rightedge, char dir) 
+void Saw_init(Saw* saw,  int idx,  double leftedge,  double rightedge, char dir) 
 {
+    // initialize the saw
     saw->x = 60.0 * idx - 30.0;
     saw->rx = saw->x;
     if (dir == 'l') 
@@ -35,12 +37,14 @@ void Saw_init(Saw* saw,  int idx,  int leftedge,  int rightedge, char dir)
 }
 
 void Saw_update(Saw* saw) 
-{
+{   
+    // saw tick
     if (saw->dir == 'l') 
     {
         saw->dx = (-4.0 - saw->dx) * 0.05 + saw->dx;
-        if (saw->x - 57 < saw->leftedge || saw->x - 57 > saw->rightedge)
+        if (saw->x - 57 < saw->leftedge || saw->x - 57 > saw->rightedge) 
         {
+            // change direction
             saw->dir = 'r';
         }
     } 
@@ -49,33 +53,33 @@ void Saw_update(Saw* saw)
        saw->dx = (4.0 - saw->dx) * 0.05 + saw->dx;
        if (saw->x + 57 > saw->rightedge || saw->x + 57 < saw->leftedge) 
        {
+           // change direction
            saw->dir = 'l';
        }
     }
+    // update position
     saw->x += saw->dx;
 }
 
 int main() 
 {
-    
-    time_t now = time(NULL);
-    printf("Current time: %s", ctime(&now));
-
+    // set clock 
     clock_t start = clock();
     Saw saw;
-    Saw_init(&saw, 1, 1, 1, 'l');
+    // initialize saw
+    Saw_init(&saw, 1, 1.0, 1.0, 'l');
     double minspeed = 10000.0;
     for (int i = 0; i < 100000000; i++) 
     {
         Saw_update(&saw);
-        if (fabs(saw.dx) < fabs(minspeed)) 
+        if (fabs(saw.dx) < fabs(minspeed)) // if new min speed  
         {
             minspeed = fabs(saw.dx);
-            printf("saw.dx: %f\n", saw.dx);
+            printf("New Min Speed: %f\n", saw.dx);
         }
     }
     clock_t end = clock();
-
+    // calculate elapsed time
     double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
     printf("Elapsed time: %.3f seconds\n", elapsed);
     return 0;
