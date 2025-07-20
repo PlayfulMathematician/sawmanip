@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 typedef struct {
     double x;
     double rx;
@@ -56,6 +57,12 @@ void Saw_update(Saw* saw)
 
 int main() 
 {
+    
+    return 0;
+    time_t now = time(NULL);
+    printf("Current time: %s", ctime(&now));
+    
+    clock_t start = clock();
     Saw saw;
     Saw_init(&saw, 1, 1, 1, 'l');
     double minspeed = 10000.0;
@@ -68,5 +75,9 @@ int main()
             printf("saw.dx: %f\n", saw.dx);
         }
     }
+    clock_t end = clock();
+
+    double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("Elapsed time: %.3f seconds\n", elapsed);
     return 0;
 }
