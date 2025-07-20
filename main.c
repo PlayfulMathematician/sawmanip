@@ -124,7 +124,7 @@ int main()
         }
         srand(time(NULL)); 
 
-        int delay = rand() % 14 + 25;
+        int delay = 19 + rand() % 20; // random delay between 19 and 39
         srand(time(NULL)); 
         int seed = rand();
         Saw saw;
