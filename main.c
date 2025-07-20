@@ -131,7 +131,7 @@ int main()
         Saw saw;
         Saw_init(&saw, 2, 1, 3, dir);
         int lasti = 0;
-        for (int i = 0; i < 100000000; i++) 
+        for (int i = 0; i < 1000000000; i++) 
         {
             Saw_update(&saw);
             if (i - lasti > delay) 
