@@ -1,8 +1,27 @@
+/*
+ <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) 2025 bringupyourpost
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-// saw struct definition
+
 typedef struct {
     double x;
     double rx; // root x
@@ -82,7 +101,6 @@ int main()
    double minspeed = 10000.0;
    int e = 100000;
     while (1) {
-        
         srand(time(NULL)); 
         int pos;
         int changed = 0;
@@ -95,7 +113,8 @@ int main()
         {
             pos = 0;   
         }
-        if (rand() % 2 == 0) 
+        srand(time(NULL)); 
+        if (rand() % 2 == 0 && 0 == 1) 
         {
             dir = 'l';
         } 
@@ -103,13 +122,18 @@ int main()
         {
             dir = 'r';
         }
+        srand(time(NULL)); 
+
+        int delay = rand() % 14 + 25;
+        srand(time(NULL)); 
+        int seed = rand();
         Saw saw;
         Saw_init(&saw, 2, 1, 3, dir);
         int lasti = 0;
         for (int i = 0; i < 100000000; i++) 
         {
             Saw_update(&saw);
-            if (i - lasti > 30) 
+            if (i - lasti > delay) 
             {
                int rng = rand();
                if (rng % 4 == 2)
@@ -140,6 +164,11 @@ int main()
             
         }
         if(changed) {
+            printf("New minimum speed found: %d\n", seed);
+            printf("Dir %c\n", dir );
+            printf("Position: %d\n", pos);
+            printf("Delay: %d\n", delay);
+
             printf("%.20f\n", fabs(minspeed));
             // get order of magnitude
             int order = 0;
