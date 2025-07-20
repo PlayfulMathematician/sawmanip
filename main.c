@@ -81,22 +81,25 @@ int main()
 {
    double minspeed = 10000.0;
    int e = 100000;
-   while (1) {
+    while (1) {
         // set clock 
         Saw saw;
         // initialize saw
         srand(time(NULL)); // seed random number generator
         Saw_init(&saw, 1, 1.0, 1.0, 'l');
+        int lasti = 0;
         for (int i = 0; i < 100000000; i++) 
         {
             Saw_update(&saw);
-            if (rand() % 200 == 0) 
+            if (i - lasti > 30) 
             {
-                Saw_on_death(&saw, 100);
-            }
-            if (rand() % 200 == 100) 
-            {
-                Saw_on_death(&saw, 0);
+                int rng = rand();
+               if (rng % 4 == 2)
+               {
+                Saw_on_death(&saw, 0.0); // reset saw position
+                lasti = i; // reset lasti
+               }
+               
             }
            
             if (fabs(saw.dx) <= fabs(minspeed)) // if new min speed  
@@ -105,7 +108,7 @@ int main()
                 {   
                     if (fabs(minspeed) == fabs(saw.dx))
                     {
-                        if (e < i)
+                        if (e > i)
                         {
                             e = i;
                         }
@@ -121,6 +124,4 @@ int main()
         printf("%.20f\n", fabs(minspeed));
         printf("e: %d\n", e);
     }
-
-        return 0;
 }
