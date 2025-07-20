@@ -88,8 +88,12 @@ int main()
     for (int i = 0; i < 100000000; i++) 
     {
         Saw_update(&saw);
-        if (fabs(saw.dx) < fabs(minspeed)) // if new min speed  
+        if (rand() % 1000 == 0) 
         {
+            Saw_on_death(&saw, 0.0);
+        }
+        if (fabs(saw.dx) < fabs(minspeed)) // if new min speed  
+        {   
             minspeed = fabs(saw.dx);
             printf("New Min Speed: %f\n", saw.dx);
         }
