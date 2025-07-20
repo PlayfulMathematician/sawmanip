@@ -82,11 +82,11 @@ int main()
    double minspeed = 10000.0;
    int e = 100000;
     while (1) {
-        // set clock 
-        Saw saw;
-        // initialize saw
-        srand(time(NULL)); // seed random number generator
+        
+        srand(time(NULL)); 
         int pos;
+        int changed = 0;
+        char dir;
         if (rand() % 2 == 0) 
         {
             pos = 1000;
@@ -95,7 +95,16 @@ int main()
         {
             pos = 0;   
         }
-        Saw_init(&saw, 2, 1, 3, 'l');
+        if (rand() % 2 == 0) 
+        {
+            dir = 'l';
+        } 
+        else 
+        {
+            dir = 'r';
+        }
+        Saw saw;
+        Saw_init(&saw, 2, 1, 3, dir);
         int lasti = 0;
         for (int i = 0; i < 100000000; i++) 
         {
@@ -112,25 +121,36 @@ int main()
             }
            
             if (fabs(saw.dx) <= fabs(minspeed)) // if new min speed  
-            {   
-                if ( fabs(saw.dx) < fabs(minspeed) || (fabs(saw.dx) == fabs(minspeed))) 
-                {   
+            {      
                     if (fabs(minspeed) == fabs(saw.dx))
                     {
                         if (e > i)
                         {
                             e = i;
+                            changed = 1; 
                         }
                     }
                     else{
                         minspeed = saw.dx; 
-                        e = i; // set new min speed
+                        e = i; 
+                        changed = 1; 
                     }
                     
-                }
             }
+            
         }
-        printf("%.20f\n", fabs(minspeed));
-        printf("e: %d\n", e);
+        if(changed) {
+            printf("%.20f\n", fabs(minspeed));
+            // get order of magnitude
+            int order = 0;
+            double msa = fabs(minspeed);
+            while (msa <= 1.0)
+            {
+                msa = msa * 10.0;
+                order++;            
+            }
+            printf("Order of magnitude: %d\n", order);
+            printf("e: %d\n", e);
+        }
     }
 }
