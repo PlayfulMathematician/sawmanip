@@ -10,7 +10,7 @@ typedef struct {
 
 } Saw;
 
-void Saw_init(Saw* saw, unsigned int idx, unsigned int leftedge, unsigned int rightedge, char dir) 
+void Saw_init(Saw* saw,  int idx,  int leftedge,  int rightedge, char dir) 
 {
     saw->x = 60.0 * idx - 30.0;
     saw->rx = saw->x;
@@ -54,7 +54,7 @@ void Saw_update(Saw* saw)
 }
 
 int main() 
-{   clock_t start = clock();
+{
     Saw saw;
     Saw_init(&saw, 2, 1, 3, 'r');
     
