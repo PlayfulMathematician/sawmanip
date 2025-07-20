@@ -79,28 +79,33 @@ void Saw_on_death(Saw* saw, double px)
 
 int main() 
 {
-    // set clock 
-    clock_t start = clock();
-    Saw saw;
-    // initialize saw
-    Saw_init(&saw, 1, 1.0, 1.0, 'l');
-    double minspeed = 10000.0;
-    for (int i = 0; i < 100000000; i++) 
-    {
-        Saw_update(&saw);
-        if (rand() % 100 == 0) 
+        double minspeed = 10000.0;
+
+   while (1) {
+        // set clock 
+        clock_t start = clock();
+        Saw saw;
+        // initialize saw
+        srand(time(NULL)); // seed random number generator
+        Saw_init(&saw, 1, 1.0, 1.0, 'l');
+        for (int i = 0; i < 100000000; i++) 
         {
-            Saw_on_death(&saw, 0.0);
+            Saw_update(&saw);
+            if (rand() % 100 == 0) 
+            {
+                Saw_on_death(&saw, 0.0);
+            }
+            if (fabs(saw.dx) < fabs(minspeed)) // if new min speed  
+            {   
+                minspeed = saw.dx;
+            }
         }
-        if (fabs(saw.dx) < fabs(minspeed)) // if new min speed  
-        {   
-            minspeed = fabs(saw.dx);
-            printf("New Min Speed: %.20f\n", saw.dx);
-        }
+        clock_t end = clock();
+        // calculate elapsed time
+        double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+        // printf("Elapsed time: %.3f seconds\n", elapsed);
+        printf("%.20f\n", fabs(minspeed));
     }
-    clock_t end = clock();
-    // calculate elapsed time
-    double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
-    printf("Elapsed time: %.3f seconds\n", elapsed);
-    return 0;
+
+        return 0;
 }
