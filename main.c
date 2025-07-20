@@ -86,17 +86,26 @@ int main()
         Saw saw;
         // initialize saw
         srand(time(NULL)); // seed random number generator
-        Saw_init(&saw, 1, 1.0, 1.0, 'l');
+        int pos;
+        if (rand() % 2 == 0) 
+        {
+            pos = 1000;
+        } 
+        else 
+        {
+            pos = 0;   
+        }
+        Saw_init(&saw, 2, 1, 3, 'l');
         int lasti = 0;
         for (int i = 0; i < 100000000; i++) 
         {
             Saw_update(&saw);
             if (i - lasti > 30) 
             {
-                int rng = rand();
+               int rng = rand();
                if (rng % 4 == 2)
                {
-                Saw_on_death(&saw, 0.0); // reset saw position
+                Saw_on_death(&saw, pos); // reset saw position
                 lasti = i; // reset lasti
                }
                
