@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 typedef struct {
     double x;
     double rx;
@@ -56,11 +57,16 @@ void Saw_update(Saw* saw)
 int main() 
 {
     Saw saw;
-    Saw_init(&saw, 2, 1, 3, 'r');
-    
+    Saw_init(&saw, 1, 1, 1, 'l');
+    double minspeed = 10000.0;
     for (int i = 0; i < 100000000; i++) 
     {
         Saw_update(&saw);
+        if (fabs(saw.dx) < fabs(minspeed)) 
+        {
+            minspeed = fabs(saw.dx);
+            printf("saw.dx: %f\n", saw.dx);
+        }
     }
     return 0;
 }
