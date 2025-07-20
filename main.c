@@ -124,8 +124,9 @@ int main()
         }
         srand(time(NULL)); 
 
-        int delay = 19 + rand() % 20; // random delay between 19 and 39
+        int delay = 19 + rand() % 20; // random delay between 19 and 38
         srand(time(NULL)); 
+        for (int i = 0; i < 1000; i++) {rand();} // random stuff
         int seed = rand();
         Saw saw;
         Saw_init(&saw, 2, 1, 3, dir);
