@@ -1,5 +1,6 @@
 /*
- <one line to give the program's name and a brief idea of what it does.>
+    This program is an absolute nightmare just work please
+    
     Copyright (C) 2025 bringupyourpost
 
     This program is free software: you can redistribute it and/or modify
@@ -31,6 +32,8 @@ typedef struct {
     double rightedge;
 
 } Saw;
+
+
 
 void Saw_init(Saw* saw,  int idx,  double leftedge,  double rightedge, char dir) 
 {
@@ -113,7 +116,6 @@ int main()
         {
             pos = 0;   
         }
-        srand(time(NULL)); 
         if (rand() % 2 == 0) 
         {
             dir = 'l';
@@ -122,18 +124,31 @@ int main()
         {
             dir = 'r';
         }
-        srand(time(NULL)); 
 
         int delay = 19 + rand() % 20; // random delay between 19 and 38
         // int delay = 30;
-        srand(time(NULL)); 
         for (int i = 0; i < 10000; i++) {rand();} // random stuff
         int seed = rand();
         Saw saw;
         Saw_init(&saw, 2, 1, 3, dir);
         int lasti = 0;
+        double f = 10.0;
+
         for (int i = 0; i < 1000000000; i++) 
         {
+            if (f == 10.0 && fabs(saw.dx) != 4)
+            {
+                f = 4 - fabs(saw.dx); 
+                printf("DO\n");
+                printf("f = %.80f\n", f);
+            }
+            else if (fabs(4-fabs(saw.dx) ) < fabs(f) && f != 10.0)
+            {
+                printf("4! HRURAY HURUTHAYT HURYRY\n");
+                printf("f = %.40f\n", f);
+                f = 4 - fabs(saw.dx);
+            }
+            
             Saw_update(&saw);
             if (i - lasti > delay) 
             {
