@@ -1,6 +1,6 @@
 /*
-    This program is an absolute nightmare just work please
-    
+    This program is an absolute nightmare just work please.
+
     Copyright (C) 2025 bringupyourpost
 
     This program is free software: you can redistribute it and/or modify
@@ -139,13 +139,13 @@ int main()
             if (f == 10.0 && fabs(saw.dx) != 4)
             {
                 f = 4 - fabs(saw.dx); 
-                printf("DO\n");
-                printf("f = %.80f\n", f);
+                //printf("DO\n");
+                //printf("f = %.80f\n", f);
             }
             else if (fabs(4-fabs(saw.dx) ) < fabs(f) && f != 10.0)
             {
-                printf("4! HRURAY HURUTHAYT HURYRY\n");
-                printf("f = %.40f\n", f);
+                //printf("4! HRURAY HURUTHAYT HURYRY\n");
+                //printf("f = %.40f\n", f);
                 f = 4 - fabs(saw.dx);
             }
             
