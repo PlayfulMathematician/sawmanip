@@ -125,7 +125,6 @@ int main()
         {
             dir = 'r';
         }
-
         int delay = 19 + rand() % 20; // random delay between 19 and 38
         // int delay = 30;
         for (int i = 0; i < 10000; i++) {rand();} // random stuff
