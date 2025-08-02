@@ -169,7 +169,8 @@ int main()
                         changed = 1;
 
                     }
-                    else{
+                    else
+                    {
                         minspeed = saw.dx; 
                         e = i; 
                         changed = 1; 
