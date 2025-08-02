@@ -22,7 +22,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-
 typedef struct {
     double x;
     double rx; // root x
@@ -38,6 +37,7 @@ typedef struct {
 void Saw_init(Saw* saw,  int idx,  double leftedge,  double rightedge, char dir) 
 {
     // initialize the saw
+
     saw->x = 60.0 * idx - 30.0;
     saw->rx = saw->x;
     if (dir == 'l') 
@@ -53,8 +53,8 @@ void Saw_init(Saw* saw,  int idx,  double leftedge,  double rightedge, char dir)
         printf("Saw_init: Invalid direction '%c'\n", dir);
         return;
     }
-    saw->leftedge = 60.0 * leftedge - 30.0;
-    saw->rightedge = 60.0 * rightedge - 30.0;
+    saw->leftedge = 60.0 * leftedge + 30.0;
+    saw->rightedge = 60.0 * rightedge + 30.0;
     saw->dir = dir;
 }
 
@@ -101,10 +101,11 @@ void Saw_on_death(Saw* saw, double px)
 
 int main() 
 {
-   double minspeed = 10000.0;
-   int e = 100000;
+    double minspeed = 10000.0;
+    int e = 100000;
+    srand(time(nullptr));
+
     while (1) {
-        srand(time(NULL)); 
         int pos;
         int changed = 0;
         char dir;
@@ -163,13 +164,11 @@ int main()
            
             if (fabs(saw.dx) <= fabs(minspeed)) // if new min speed  
             {      
-                    if (fabs(minspeed) == fabs(saw.dx))
+                    if (fabs(minspeed) == fabs(saw.dx) && e > i)
                     {
-                        if (e > i)
-                        {
-                            e = i;
-                            changed = 1; 
-                        }
+                        e = i;
+                        changed = 1;
+
                     }
                     else{
                         minspeed = saw.dx; 
@@ -187,7 +186,6 @@ int main()
             printf("Delay: %d\n", delay);
 
             printf("%.20f\n", fabs(minspeed));
-            // get order of magnitude
             int order = 0;
             double msa = fabs(minspeed);
             while (msa <= 1.0)
