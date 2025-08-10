@@ -3,5 +3,10 @@ project(sawmanip C)
 
 set(CMAKE_C_STANDARD 11)
 
+# Tell compiler where to find headers
+include_directories(include)
+
 add_executable(sawmanip
-        main.c)
+        src/main.c
+        src/saw.c
+)

@@ -1,5 +1,5 @@
 *.out
-.vscode
 *.exe
 cmake-build-*
+.vscode
 .idea

@@ -22,6 +22,15 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include "../include/saw.h"
+#define start_hash 5381
+void rng_function(unsigned long* num) {
+    unsigned long hash = start_hash;
+    for (int i = 0; i < 8; i++) {
+        hash = ((hash << 3) + hash) + *num;
+    }
+    *num = hash;
+}
 typedef struct {
     double x;
     double rx; // root x
@@ -50,7 +59,6 @@ void Saw_init(Saw* saw,  int idx,  double leftedge,  double rightedge, char dir)
     } 
     else 
     {
-        printf("Saw_init: Invalid direction '%c'\n", dir);
         return;
     }
     saw->leftedge = 60.0 * leftedge + 30.0;
@@ -82,8 +90,7 @@ void Saw_update(Saw* saw)
     // update position
     saw->x += saw->dx;
 }
-// whenever the player dies, reset the saw position
-// i will not use this yet.
+
 void Saw_on_death(Saw* saw, double px)
 {
     saw->x = saw->rx; 
@@ -101,7 +108,14 @@ void Saw_on_death(Saw* saw, double px)
 
 int main() 
 {
-    double minspeed = 10000.0;
+    printf("Sawmanip\n");
+    unsigned long randomnumber = 0;
+    for (int i = 1; i <= 10; i++) {
+        rng_function(&randomnumber);
+        printf("%d\n", randomnumber);
+    }
+    return 0;
+    double x = 10000.0;
     int e = 100000;
     srand(time(nullptr));
 
@@ -161,9 +175,9 @@ int main()
                
             }
            
-            if (fabs(saw.dx) <= fabs(minspeed)) // if new min speed  
+            if (fabs(saw.dx) <= fabs(x)) // if new min speed
             {      
-                    if (fabs(minspeed) == fabs(saw.dx) && e > i)
+                    if (fabs(x) == fabs(saw.dx) && e > i)
                     {
                         e = i;
                         changed = 1;
@@ -171,7 +185,7 @@ int main()
                     }
                     else
                     {
-                        minspeed = saw.dx; 
+                        x = saw.dx;
                         e = i; 
                         changed = 1; 
                     }
@@ -185,9 +199,9 @@ int main()
             printf("Position: %d\n", pos);
             printf("Delay: %d\n", delay);
 
-            printf("%.20f\n", fabs(minspeed));
+            printf("%.20f\n", fabs(x));
             int order = 0;
-            double msa = fabs(minspeed);
+            double msa = fabs(x);
             while (msa <= 1.0)
             {
                 msa = msa * 10.0;
