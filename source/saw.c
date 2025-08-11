@@ -21,7 +21,7 @@ Saw Simulation!
 
 #include <stdlib.h>
 
-void Saw_init(Saw* saw,  int idx,  double leftedge,  double rightedge, char dir)
+void Saw_init(Saw* saw, int idx,  double leftedge, double rightedge, char dir)
 {
     saw->x = 60.0 * idx - 30.0;
     saw->rx = saw->x;
