@@ -19,13 +19,17 @@ Random Number Generation!
 #include <stdint.h>
 #include <time.h>
 #include "../include/random.h"
-void rng_func(int64_t* random) {
-    *random ^= *random << 13;
-    *random ^= *random >> 17;
-    *random ^= *random << 5;
-}
+#include <stdint.h>
+#include <time.h>
+
 int64_t seed_rng() {
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
-    return (int64_t)(ts.tv_sec * 1000000000LL + ts.tv_nsec);
+    return (int64_t)ts.tv_sec ^ ((int64_t)ts.tv_nsec << 32);
+}
+
+void rng_func(int64_t *random) {
+    *random ^= *random << 13;
+    *random ^= *random >> 17;
+    *random ^= *random << 5;
 }

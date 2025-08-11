@@ -22,6 +22,7 @@
 #include <math.h>
 #include "../include/saw.h"
 #include "../include/random.h"
+#include <inttypes.h>
 
 
 int main() 
@@ -55,14 +56,13 @@ int main()
         }
         rng_func(&rng);
         int delay = 19 + rng % 20;
-        // int delay = 30;
         rng_func(&rng);
-        int seed = rng;
+        int64_t seed = rng;
         Saw saw;
         Saw_init(&saw, 2, 1, 3, dir);
         int lasti = 0;
 
-        for (int i = 0; i < 1000000000; i++)
+        for (int i = 0; i < 1000000000; i++) {
             
             Saw_update(&saw);
             if (i - lasti > delay) 
@@ -93,7 +93,7 @@ int main()
             
         }
         if(changed) {
-            printf("New minimum speed found: %d\n", seed);
+            printf("Seed is %" PRId64 "\n", seed);
             printf("Dir %c\n", dir );
             printf("Position: %d\n", pos);
             printf("Delay: %d\n", delay);
