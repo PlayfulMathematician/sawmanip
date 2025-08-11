@@ -1,5 +1,5 @@
 /*
-Saw Simulation! But it is a header
+RNG Header!
     Copyright (C) 2025 bringupyourpost
 
     This program is free software: you can redistribute it and/or modify
@@ -16,20 +16,10 @@ Saw Simulation! But it is a header
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
-#ifndef SAW_H
-#define SAW_H
 
-typedef struct {
-    double x;
-    double rx;
-    double dx;
-    char dir;
-    double leftedge;
-    double rightedge;
-} Saw;
-
-void Saw_init(Saw* saw, int idx, double leftedge, double rightedge, char dir);
-void Saw_update(Saw* saw);
-void Saw_on_death(Saw* saw, double px);
-
-#endif // SAW_H
+#ifndef RANDOM_H
+#define RANDOM_H
+#include <stdint.h>
+int64_t rng_func(int64_t* random);
+int64_t seed_rng();
+#endif

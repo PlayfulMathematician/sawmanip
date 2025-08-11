@@ -1,5 +1,5 @@
 /*
-Saw Simulation! But it is a header
+Random Number Generation!
     Copyright (C) 2025 bringupyourpost
 
     This program is free software: you can redistribute it and/or modify
@@ -16,20 +16,17 @@ Saw Simulation! But it is a header
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 */
-#ifndef SAW_H
-#define SAW_H
-
-typedef struct {
-    double x;
-    double rx;
-    double dx;
-    char dir;
-    double leftedge;
-    double rightedge;
-} Saw;
-
-void Saw_init(Saw* saw, int idx, double leftedge, double rightedge, char dir);
-void Saw_update(Saw* saw);
-void Saw_on_death(Saw* saw, double px);
-
-#endif // SAW_H
+#include <stdint.h>
+#include <time.h>
+#include "../include/random.h"
+int64_t rng_func(int64_t* random) {
+    *random ^= *random << 13;
+    *random ^= *random >> 17;
+    *random ^= *random << 5;
+    return *random;
+}
+int64_t seed_rng() {
+    struct timespec ts;
+    clock_gettime(CLOCK_REALTIME, &ts); 
+    return (int64_t)(ts.tv_sec * 1000000000LL + ts.tv_nsec);
+}

@@ -23,23 +23,13 @@
 #include <math.h>
 #include <time.h>
 #include "../include/saw.h"
-#define start_hash 5381
-void rng_function(unsigned long* num) {
-    unsigned long hash = start_hash;
-    for (int i = 0; i < 8; i++) {
-        hash = ((hash << 3) + hash) + *num;
-    }
-    *num = hash;
-}
+#include "../include/random.h"
+
+
 int main() 
 {
-    printf("Sawmanip\n");
-    unsigned long randomnumber = 0;
-    for (int i = 1; i <= 10; i++) {
-        rng_function(&randomnumber);
-        printf("%d\n", randomnumber);
-    }
-    return 0;
+
+    return 0; // I will write the rest of this later
     double x = 10000.0;
     int e = 100000;
     srand(time(NULL));

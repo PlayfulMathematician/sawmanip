@@ -7,6 +7,10 @@ set(CMAKE_C_STANDARD 11)
 include_directories(include)
 
 add_executable(sawmanip
-        src/main.c
-        src/saw.c
+        source/main.c
+        source/saw.c
+        source/random.c
+        include/random.h
+        include/saw.h
+
 )
