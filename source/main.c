@@ -19,9 +19,7 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
-#include <time.h>
 #include "../include/saw.h"
 #include "../include/random.h"
 
