@@ -17,14 +17,30 @@ Random Number Generation!
 
 */
 #include <stdint.h>
-#include <time.h>
 #include "../include/random.h"
 
-int64_t seed_rng() {
+#ifdef _WIN32
+#include <windows.h>
+
+int64_t seed_rng(void) {
+    LARGE_INTEGER counter;
+    QueryPerformanceCounter(&counter);
+    int64_t seed = counter.QuadPart;
+    if (seed == 0) seed = 1;
+    return seed;
+}
+
+#else
+#include <time.h>
+
+int64_t seed_rng(void) {
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
-    return (int64_t)ts.tv_sec ^ ((int64_t)ts.tv_nsec << 32);
+    int64_t seed = (int64_t)ts.tv_sec ^ ((int64_t)ts.tv_nsec << 32);
+    if (seed == 0) seed = 1;
+    return seed;
 }
+#endif
 
 void rng_func(int64_t *random) {
     *random ^= *random << 13;
