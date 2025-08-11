@@ -90,7 +90,7 @@ int main()
                         changed = 1; 
                     }
             }
-            
+
         }
         if(changed) {
             printf("Seed is %" PRId64 "\n", seed);
@@ -104,7 +104,7 @@ int main()
             while (msa <= 1.0)
             {
                 msa = msa * 10.0;
-                order++;            
+                order++;
             }
             printf("Order of magnitude: %d\n", order);
             printf("e: %d\n", e);

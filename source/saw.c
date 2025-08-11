@@ -18,6 +18,9 @@ Saw Simulation!
 */
 #include <math.h>
 #include "../include/saw.h"
+
+#include <stdlib.h>
+
 void Saw_init(Saw* saw,  int idx,  double leftedge,  double rightedge, char dir)
 {
     saw->x = 60.0 * idx - 30.0;
@@ -32,7 +35,7 @@ void Saw_init(Saw* saw,  int idx,  double leftedge,  double rightedge, char dir)
     }
     else
     {
-        return;
+        exit(1);
     }
     saw->leftedge = 60.0 * leftedge + 30.0;
     saw->rightedge = 60.0 * rightedge + 30.0;
@@ -41,21 +44,26 @@ void Saw_init(Saw* saw,  int idx,  double leftedge,  double rightedge, char dir)
 
 void Saw_update(Saw* saw)
 {
+    char opposite_dir;
+    double dirx;
     if (saw->dir == 'l')
     {
-        saw->dx = (-4.0 - saw->dx) * 0.05 + saw->dx;
-        if (saw->x - 57 < saw->leftedge || saw->x - 57 > saw->rightedge)
-        {
-            saw->dir = 'r';
-        }
+        dirx = -1.0;
+        opposite_dir = 'r';
     }
     else if (saw->dir == 'r')
     {
-        saw->dx = (4.0 - saw->dx) * 0.05 + saw->dx;
-        if (saw->x + 57 > saw->rightedge || saw->x + 57 < saw->leftedge)
-        {
-            saw->dir = 'l';
-        }
+        opposite_dir = 'l';
+        dirx = 1.0;
+    }
+    else
+    {
+        exit(1);
+    }
+    saw->dx = (4*dirx - saw->dx) * 0.05 + saw->dx;
+    if (saw->x + dirx*57 < saw->leftedge || saw->x + dirx*57 > saw->rightedge)
+    {
+        saw->dir = opposite_dir;
     }
     saw->x += saw->dx;
 }
@@ -63,14 +71,14 @@ void Saw_update(Saw* saw)
 void Saw_on_death(Saw* saw, double px)
 {
     saw->x = saw->rx;
+    saw->dx = fabs(saw->dx);
     if (px < saw->x)
     {
         saw->dir = 'l';
-        saw->dx = -fabs(saw->dx);
+        saw->dx = -saw->dx;
     }
     else
     {
         saw->dir = 'r';
-        saw->dx = fabs(saw->dx);
     }
 }
