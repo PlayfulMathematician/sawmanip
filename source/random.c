@@ -19,8 +19,6 @@ Random Number Generation!
 #include <stdint.h>
 #include <time.h>
 #include "../include/random.h"
-#include <stdint.h>
-#include <time.h>
 
 int64_t seed_rng() {
     struct timespec ts;
