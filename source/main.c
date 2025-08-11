@@ -28,8 +28,7 @@
 
 int main() 
 {
-    int64_t seed = seed_rng();
-    return 0; // I will write the rest of this later
+    int64_t rng = seed_rng();
     double x = 10000.0;
     int e = 100000;
 
@@ -37,8 +36,8 @@ int main()
         int pos;
         int changed = 0;
         char dir;
-        rng_func(&seed);
-        if (seed % 2 == 0)
+        rng_func(&rng);
+        if (rng % 2 == 0)
         {
             pos = 1000;
         } 
@@ -46,7 +45,9 @@ int main()
         {
             pos = 0;   
         }
-        if (rand() % 2 == 0) 
+        rng_func(&rng);
+
+        if (rng % 2 == 0)
         {
             dir = 'l';
         } 
@@ -54,39 +55,26 @@ int main()
         {
             dir = 'r';
         }
-        int delay = 19 + rand() % 20; // random delay between 19 and 38
+        rng_func(&rng);
+        int delay = 19 + rng % 20;
         // int delay = 30;
-        for (int i = 0; i < 10000; i++) {rand();} // random stuff
-        int seed = rand();
+        rng_func(&rng);
+        int seed = rng;
         Saw saw;
         Saw_init(&saw, 2, 1, 3, dir);
         int lasti = 0;
-        double f = 10.0;
 
-        for (int i = 0; i < 1000000000; i++) 
-        {
-            if (f == 10.0 && fabs(saw.dx) != 4)
-            {
-                f = 4 - fabs(saw.dx); 
-                //printf("DO\n");
-                //printf("f = %.80f\n", f);
-            }
-            else if (fabs(4-fabs(saw.dx) ) < fabs(f) && f != 10.0)
-            {
-                //printf("4! HRURAY HURUTHAYT HURYRY\n");
-                //printf("f = %.40f\n", f);
-                f = 4 - fabs(saw.dx);
-            }
+        for (int i = 0; i < 1000000000; i++)
             
             Saw_update(&saw);
             if (i - lasti > delay) 
             {
-               int rng = rand();
-               if (rng % 4 == 2)
-               {
-                Saw_on_death(&saw, pos); // reset saw position
-                lasti = i; // reset lasti
-               }
+                rng_func(&rng);
+                if (rng % 4 == 2)
+                {
+                    Saw_on_death(&saw, pos); // reset saw position
+                    lasti = i; // reset lasti
+                }
                
             }
            
@@ -96,7 +84,6 @@ int main()
                     {
                         e = i;
                         changed = 1;
-
                     }
                     else
                     {
@@ -104,7 +91,6 @@ int main()
                         e = i; 
                         changed = 1; 
                     }
-                    
             }
             
         }
