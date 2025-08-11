@@ -70,13 +70,13 @@ int main()
                 rng_func(&rng);
                 if (rng % 4 == 2)
                 {
-                    Saw_on_death(&saw, pos); // reset saw position
-                    lasti = i; // reset lasti
+                    Saw_on_death(&saw, pos);
+                    lasti = i;
                 }
                
             }
            
-            if (fabs(saw.dx) <= fabs(x)) // if new min speed
+            if (fabs(saw.dx) <= fabs(x))
             {      
                     if (fabs(x) == fabs(saw.dx) && e > i)
                     {
