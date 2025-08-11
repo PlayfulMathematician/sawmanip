@@ -42,7 +42,7 @@ int main()
     return 0;
     double x = 10000.0;
     int e = 100000;
-    srand(time(nullptr));
+    srand(time(NULL));
 
     while (1) {
         int pos;
