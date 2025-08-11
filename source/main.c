@@ -28,17 +28,17 @@
 
 int main() 
 {
-
+    int64_t seed = seed_rng();
     return 0; // I will write the rest of this later
     double x = 10000.0;
     int e = 100000;
-    srand(time(NULL));
 
     while (1) {
         int pos;
         int changed = 0;
         char dir;
-        if (rand() % 2 == 0) 
+        rng_func(&seed);
+        if (seed % 2 == 0)
         {
             pos = 1000;
         } 
