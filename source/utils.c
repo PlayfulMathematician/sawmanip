@@ -10,12 +10,15 @@ void frame_to_time(int frames) {
     int minutes;
     int hours;
     int days;
+    int months;
     modpair(&frames, 30, &decimal_seconds);
     modpair(&frames, 60, &seconds);
     modpair(&frames, 60, &minutes);
     modpair(&frames, 24, &hours);
     modpair(&frames, 30, &days);
-    float seconds_tot = (float)decimal_seconds/(float)30 + (float)seconds; // over casting
-    printf("Months: %d\nDays: %d\nHours: %d\nMinutes: %d\nSeconds: %.2f\n", frames, days, hours, minutes, seconds_tot);
+    modpair(&frames, 12, &months);
+
+    float seconds_tot = (float)decimal_seconds/(float)30 + (float)seconds;
+    printf("Year: %d\nMonths: %d\nDays: %d\nHours: %d\nMinutes: %d\nSeconds: %.2f\n", frames, months, days, hours, minutes, seconds_tot);
 
 }
