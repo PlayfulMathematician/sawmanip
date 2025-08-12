@@ -22,27 +22,27 @@ Random Number Generation!
 #ifdef _WIN32
 #include <windows.h>
 
-int64_t seed_rng(void) {
+uint64_t seed_rng(void) {
     LARGE_INTEGER counter;
     QueryPerformanceCounter(&counter);
     int64_t seed = counter.QuadPart;
     if (seed == 0) seed = 1;
-    return seed;
+    return (uint64_t)seed;
 }
 
 #else
 #include <time.h>
 
-int64_t seed_rng(void) {
+uint64_t seed_rng(void) {
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
     int64_t seed = (int64_t)ts.tv_sec ^ ((int64_t)ts.tv_nsec << 32);
     if (seed == 0) seed = 1;
-    return seed;
+    return (uint64_t)seed;
 }
 #endif
 
-void rng_func(int64_t *random) {
+void rng_func(uint64_t *random) {
     *random ^= *random << 13;
     *random ^= *random >> 17;
     *random ^= *random << 5;

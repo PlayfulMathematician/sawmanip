@@ -22,12 +22,14 @@
 #include <math.h>
 #include "../include/saw.h"
 #include "../include/random.h"
+#include "../include/utils.h"
+
 #include <inttypes.h>
 
 
 int main() 
 {
-    int64_t rng = seed_rng();
+    uint64_t rng = seed_rng();
     double x = 10000.0;
     int e = 100000;
 
@@ -57,7 +59,7 @@ int main()
         rng_func(&rng);
         int delay = 19 + rng % 20;
         rng_func(&rng);
-        int64_t seed = rng;
+        uint64_t seed = rng;
         Saw saw;
         Saw_init(&saw, 2, 1, 3, dir);
         int lasti = 0;
@@ -93,7 +95,7 @@ int main()
 
         }
         if(changed) {
-            printf("Seed is %" PRId64 "\n", seed);
+            printf("Seed is %" PRIu64 "\n", seed);
             printf("Dir %c\n", dir );
             printf("Position: %d\n", pos);
             printf("Delay: %d\n", delay);
@@ -107,7 +109,7 @@ int main()
                 order++;
             }
             printf("Order of magnitude: %d\n", order);
-            printf("e: %d\n", e);
+            frame_to_time(e);
         }
     }
 }

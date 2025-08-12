@@ -20,6 +20,6 @@ RNG Header!
 #ifndef RANDOM_H
 #define RANDOM_H
 #include <stdint.h>
-void rng_func(int64_t* random);
-int64_t seed_rng();
+void rng_func(uint64_t* random);
+uint64_t seed_rng();
 #endif
