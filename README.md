@@ -18,6 +18,14 @@ Seconds: 20.57
 
 # How to build
 Open this open and cd into it. Now use make a build directory and cd into it then do 
-cmake ..
-then do cmake --build .
-this will build it and you will have a file that you can execute. 
+``cmake ..``
+then do 
+``cmake --build .``
+This will build it and you will have a file that you can execute. 
+
+# Directory Structure
+There are 4 relevant files. 
+main.c - The program that handles all the top level saw stuff.
+saw.c - The program that has the saw struct and all relevant saw logic.
+random.c - The RNG Program (this needs to exist so this code can run the same on all computers given the same seed)
+utils.c - The program for utils
