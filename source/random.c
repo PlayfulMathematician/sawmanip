@@ -22,6 +22,7 @@ Random Number Generation!
 #ifdef _WIN32
 #include <windows.h>
 
+
 uint64_t seed_rng(void) {
     LARGE_INTEGER counter;
     QueryPerformanceCounter(&counter);
