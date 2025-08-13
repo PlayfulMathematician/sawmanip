@@ -15,3 +15,9 @@ Days: 17
 Hours: 11
 Minutes: 3
 Seconds: 20.57
+
+# How to build
+Open this open and cd into it. Now use make a build directory and cd into it then do 
+cmake ..
+then do cmake --build .
+this will build it and you will have a file that you can execute. 
