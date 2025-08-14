@@ -1,20 +1,14 @@
 # Saw Manip
 
 Hi, welcome to my saw manipulator project. This is a project that simulates saws in Appel, the scratch game by griffpatch. It tries random saw manipulations to find the smallest saw speed. The goal is 0 speed. But the minimum is around 5 * 10^-13. It is written in C.  If you find a new min make a pull request.
-This is licensed under the GNU General Public License v3.0. I will update this later.
+
+Info on lowest speed:
 ```
-Seed is 18359475303061273792
+Seed: 18359475303061273792
 Dir r
 Position: 0
 Delay: 24
-0.00000000000050270899
-Order of magnitude: 13
-Year: 0
-Months: 11
-Days: 17
-Hours: 11
-Minutes: 3
-Seconds: 20.57
+Speed: 0.00000000000050270899
 ```
 
 # How to build
